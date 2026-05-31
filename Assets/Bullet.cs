@@ -3,13 +3,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Rigidbody rb;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -19,6 +18,13 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("D"))
         {
+            PlayerMove player = FindFirstObjectByType<PlayerMove>();
+
+            if (player != null)
+            {
+                player.CollectItem(0);
+            }
+
             Destroy(collision.gameObject);
         }
         Destroy(gameObject);

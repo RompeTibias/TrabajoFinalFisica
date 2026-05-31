@@ -4,14 +4,25 @@ public class PlayerMove : MonoBehaviour
 {
     float speed = 5f;
     float sensitivity = 1f;
+    float jumpForce = 5f;
+    bool isGrounded;
 
     InputAction move;
     InputAction look;
+    InputAction jump;
+    InputAction pause;
+
+    Rigidbody rb;
+
+    public bool[] collected = new bool[3];
 
     public GameObject playerCamera;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject pasueCanvas;
+
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
         move = new InputAction("Move", binding: "<Keyboard>/w");
         move.AddCompositeBinding("2DVector")
             .With("Up", "<Keyboard>/w")
@@ -22,9 +33,14 @@ public class PlayerMove : MonoBehaviour
 
         look = new InputAction("Look", binding: "<Mouse>/delta");
         look.Enable();
+
+        jump = new InputAction("Jump", binding: "<Keyboard>/space");
+        jump.Enable();
+
+        pause = new InputAction("PauseMenu", binding: "<Keyboard>/escape");
+        pause.Enable();
     }
 
-    // Update is called once per frame
     void Update()
     {
         var moveInput = move.ReadValue<Vector2>();
@@ -35,5 +51,29 @@ public class PlayerMove : MonoBehaviour
 
         transform.Rotate(0, lookInput.x * sensitivity, 0);
         playerCamera.transform.Rotate(-lookInput.y * sensitivity, 0, 0);
+
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+
+        if (jump.WasPressedThisFrame() && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
+        if (pause.WasPressedThisFrame())
+        {
+            look.Disable();
+            pasueCanvas.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+
+    public void CollectItem(int index)
+    {
+        collected[index] = true;
+    }
+
+    public void EnableLook()
+    {
+        look.Enable();
     }
 }
