@@ -16672,7 +16672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2254997179888177589, guid: 2a04304db46af3145aebac266e765771, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.596
       objectReference: {fileID: 0}
     - target: {fileID: 4675582738997889697, guid: 2a04304db46af3145aebac266e765771, type: 3}
       propertyPath: Audio
@@ -16787,7 +16787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   namee: Boton
   target: {fileID: 1217367702}
-  target2: {fileID: 79536912}
+  target2: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   velocidad: 2
 --- !u!1001 &1688884311
