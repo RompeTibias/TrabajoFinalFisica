@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6476634046049445542}
   - component: {fileID: 371146848643756714}
   - component: {fileID: 8997396584751151853}
-  - component: {fileID: 2116322843061701053}
   - component: {fileID: 814058238912550805}
+  - component: {fileID: 2342293131163868721}
   m_Layer: 0
   m_Name: Bullet3
   m_TagString: F
@@ -115,18 +115,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2116322843061701053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172970643943025018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9cde09eb1737b4a900c65d0aad796a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletDos
 --- !u!54 &814058238912550805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,6 +142,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &2342293131163868721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172970643943025018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4fc525465d7694d9645f55a9e9bcc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BalaTres
 --- !u!1001 &2750148389013555031
 PrefabInstance:
   m_ObjectHideFlags: 0
