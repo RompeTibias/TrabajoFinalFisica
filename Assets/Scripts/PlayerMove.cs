@@ -11,10 +11,11 @@ public class PlayerMove : MonoBehaviour
     InputAction look;
     InputAction jump;
     InputAction pause;
+    InputAction interact;
 
     Rigidbody rb;
 
-    public bool[] collected = new bool[3];
+    public int[] collected = new int[3];
 
     public GameObject playerCamera;
     public GameObject pasueCanvas;
@@ -39,6 +40,14 @@ public class PlayerMove : MonoBehaviour
 
         pause = new InputAction("PauseMenu", binding: "<Keyboard>/escape");
         pause.Enable();
+
+        for (int i = 0; i < collected.Length; i++)
+        {
+            collected[i] = 0;
+        }
+
+        interact = new InputAction("Interact", binding: "<Keyboard>/e");
+        interact.Enable();
     }
 
     void Update()
@@ -65,11 +74,24 @@ public class PlayerMove : MonoBehaviour
             pasueCanvas.SetActive(true);
             Time.timeScale = 0f;
         }
+
+        if(interact.WasPressedThisFrame())
+        {
+            Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, 2f))
+            {
+                if (hit.collider.CompareTag("I"))
+                {
+                    hit.collider.GetComponent<Interactable>().Interact();
+                }
+            }
+        }
     }
 
     public void CollectItem(int index)
     {
-        collected[index] = true;
+        collected[index]++;
+        Debug.Log("Collected item of type " + index + ". Total: " + collected[index]);
     }
 
     public void EnableLook()
