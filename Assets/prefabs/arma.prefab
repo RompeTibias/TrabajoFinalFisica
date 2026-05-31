@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: a629d818d32391945940e0ae67b99bdf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 28cb403078dc8474598f00fee9285694, type: 2}
+      objectReference: {fileID: 2100000, guid: 487d5243f668ffc4ebba874b9fadf98a, type: 2}
     - target: {fileID: -3542852092398272455, guid: a629d818d32391945940e0ae67b99bdf, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.17
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -1461304994638716399, guid: a629d818d32391945940e0ae67b99bdf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0c79c98f37d8973439c83ed45072d2ec, type: 2}
+      objectReference: {fileID: 2100000, guid: 487d5243f668ffc4ebba874b9fadf98a, type: 2}
     - target: {fileID: -804731622281664130, guid: a629d818d32391945940e0ae67b99bdf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: -678588488315902003, guid: a629d818d32391945940e0ae67b99bdf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0c79c98f37d8973439c83ed45072d2ec, type: 2}
+      objectReference: {fileID: 2100000, guid: 9b46346c7d536bd43a774b7219696f26, type: 2}
     - target: {fileID: 919132149155446097, guid: a629d818d32391945940e0ae67b99bdf, type: 3}
       propertyPath: m_Name
       value: arma

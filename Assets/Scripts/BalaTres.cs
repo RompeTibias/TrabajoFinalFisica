@@ -18,15 +18,18 @@ public class BalaTres : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("F"))
         {
+
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
             PlayerMove player = FindFirstObjectByType<PlayerMove>();
 
             if (player != null)
             {
                 player.CollectItem(2);
             }
-
-            Destroy(collision.gameObject);
         }
-        Destroy(gameObject);
+            Destroy(gameObject);
     }
 }

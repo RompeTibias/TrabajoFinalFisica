@@ -18,15 +18,17 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("D"))
         {
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
             PlayerMove player = FindFirstObjectByType<PlayerMove>();
 
             if (player != null)
             {
                 player.CollectItem(0);
             }
-
-            Destroy(collision.gameObject);
         }
-        Destroy(gameObject);
+            Destroy(gameObject);
     }
 }
