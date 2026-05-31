@@ -18,6 +18,11 @@ public class MenuController : MonoBehaviour
     public void GoMenu()
     {
         SceneManager.LoadScene("MainMenu");
+
+        PlayerMove playerMove = FindFirstObjectByType<PlayerMove>();
+        playerMove.EnableLook();
+        pauseCanvas.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void Resume()
