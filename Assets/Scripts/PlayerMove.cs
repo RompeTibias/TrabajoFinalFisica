@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerMove : MonoBehaviour
 {
     float speed = 5f;
@@ -12,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     InputAction jump;
     InputAction pause;
     InputAction interact;
+    InputAction reset;
 
     Rigidbody rb;
 
@@ -40,6 +42,9 @@ public class PlayerMove : MonoBehaviour
 
         pause = new InputAction("PauseMenu", binding: "<Keyboard>/escape");
         pause.Enable();
+
+        reset = new InputAction("Reset", binding: "<Keyboard>/r");
+        reset.Enable();
 
         for (int i = 0; i < collected.Length; i++)
         {
@@ -85,6 +90,11 @@ public class PlayerMove : MonoBehaviour
                     hit.collider.GetComponent<Interactable>().Interact();
                 }
             }
+        }
+
+        if (reset.WasPressedThisFrame())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
