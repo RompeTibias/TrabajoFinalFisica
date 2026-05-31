@@ -23,6 +23,8 @@ public class PlayerShoot : MonoBehaviour
         changeBullet.Enable();
 
         playerMove = GetComponent<PlayerMove>();
+
+        HideMouse();
     }
 
     void Update()
@@ -64,6 +66,12 @@ public class PlayerShoot : MonoBehaviour
                 weapons[i].SetActive(false);
             }
         }
+    }
+
+    void HideMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 }
