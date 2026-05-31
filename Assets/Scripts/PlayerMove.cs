@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     InputAction pause;
     InputAction interact;
     InputAction reset;
+    InputAction mute;
 
     Rigidbody rb;
 
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject playerCamera;
     public GameObject pasueCanvas;
+    public GameObject Audio;
 
     void Start()
     {
@@ -53,6 +55,9 @@ public class PlayerMove : MonoBehaviour
 
         interact = new InputAction("Interact", binding: "<Keyboard>/e");
         interact.Enable();
+
+        mute = new InputAction("Mute", binding: "<Keyboard>/m");
+        mute.Enable();
     }
 
     void Update()
@@ -95,6 +100,11 @@ public class PlayerMove : MonoBehaviour
         if (reset.WasPressedThisFrame())
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (mute.WasPressedThisFrame())
+        {
+            Audio.GetComponent<AudioSource>().mute = !Audio.GetComponent<AudioSource>().mute;
         }
     }
 
