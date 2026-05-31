@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject playerCamera;
     public GameObject pasueCanvas;
-    public GameObject Audio;
+    public GameObject audio;
 
     void Start()
     {
@@ -106,8 +107,19 @@ public class PlayerMove : MonoBehaviour
 
         if (mute.WasPressedThisFrame())
         {
-            Audio.GetComponent<AudioSource>().mute = !Audio.GetComponent<AudioSource>().mute;
+            audio.GetComponent<AudioSource>().mute = !audio.GetComponent<AudioSource>().mute;
         }
+
+        if (audio == null)
+        {
+            #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
+            #endif
+
+        }
+
     }
 
     public void CollectItem(int index)
