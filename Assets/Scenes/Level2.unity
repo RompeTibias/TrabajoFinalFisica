@@ -16679,6 +16679,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 79536910}
     - target: {fileID: 4675582738997889697, guid: 2a04304db46af3145aebac266e765771, type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 79536910}
+    - target: {fileID: 4675582738997889697, guid: 2a04304db46af3145aebac266e765771, type: 3}
       propertyPath: pasueCanvas
       value: 
       objectReference: {fileID: 2047736990}
@@ -16783,6 +16787,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   namee: Boton
   target: {fileID: 1217367702}
+  target2: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocidad: 2
 --- !u!1001 &1688884311
 PrefabInstance:
   m_ObjectHideFlags: 0

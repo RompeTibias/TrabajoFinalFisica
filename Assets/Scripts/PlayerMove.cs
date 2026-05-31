@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject playerCamera;
     public GameObject pasueCanvas;
-    public GameObject audio;
+    public GameObject audios;
 
     void Start()
     {
@@ -107,19 +107,8 @@ public class PlayerMove : MonoBehaviour
 
         if (mute.WasPressedThisFrame())
         {
-            audio.GetComponent<AudioSource>().mute = !audio.GetComponent<AudioSource>().mute;
+            audios.GetComponent<AudioSource>().mute = !audios.GetComponent<AudioSource>().mute;
         }
-
-        if (audio == null)
-        {
-            #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-            #else
-            Application.Quit();
-            #endif
-
-        }
-
     }
 
     public void CollectItem(int index)
