@@ -18,7 +18,6 @@ public class BulletDos : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("I"))
         {
-
             collision.gameObject.GetComponent<Interactable>().Interact();
         }
         if (collision.gameObject.CompareTag("Player"))
