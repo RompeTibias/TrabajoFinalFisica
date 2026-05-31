@@ -20601,6 +20601,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1282458145}
     - target: {fileID: 4675582738997889697, guid: 2a04304db46af3145aebac266e765771, type: 3}
+      propertyPath: audios
+      value: 
+      objectReference: {fileID: 1282458145}
+    - target: {fileID: 4675582738997889697, guid: 2a04304db46af3145aebac266e765771, type: 3}
       propertyPath: pasueCanvas
       value: 
       objectReference: {fileID: 260500808}
