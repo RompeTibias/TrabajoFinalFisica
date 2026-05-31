@@ -7,7 +7,7 @@ public class ALTEFECUATRO : MonoBehaviour
 
     void Update()
     {
-        if (nucleo = null)
+        if (nucleo == null)
         {
             #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
