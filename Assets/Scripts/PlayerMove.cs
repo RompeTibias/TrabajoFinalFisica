@@ -1,13 +1,21 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+
 public class PlayerMove : MonoBehaviour
 {
-    float speed = 5f;
-    float sensitivity = 1f;
-    float jumpForce = 5f;
+    [Header("Movement")]
+    [SerializeField] float speed = 5f;
+    [SerializeField] float jumpForce = 5f;
+
+    [Header("Look")]
+    [SerializeField] float lookSensitivityX = 0.15f;
+    [SerializeField] float lookSensitivityY = 0.15f;
+    [SerializeField] float minPitch = -80f;
+    [SerializeField] float maxPitch = 80f;
+
     bool isGrounded;
+    float pitch;
 
     InputAction move;
     InputAction look;
@@ -29,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        move = new InputAction("Move", binding: "<Keyboard>/w");
+        move = new InputAction("Move");
         move.AddCompositeBinding("2DVector")
             .With("Up", "<Keyboard>/w")
             .With("Down", "<Keyboard>/s")
@@ -49,65 +57,110 @@ public class PlayerMove : MonoBehaviour
         reset = new InputAction("Reset", binding: "<Keyboard>/r");
         reset.Enable();
 
-        for (int i = 0; i < collected.Length; i++)
-        {
-            collected[i] = 0;
-        }
-
         interact = new InputAction("Interact", binding: "<Keyboard>/e");
         interact.Enable();
 
         mute = new InputAction("Mute", binding: "<Keyboard>/m");
         mute.Enable();
+
+        for (int i = 0; i < collected.Length; i++)
+            collected[i] = 0;
+
+        LockMouse();
     }
 
     void Update()
     {
-        var moveInput = move.ReadValue<Vector2>();
-        var lookInput = look.ReadValue<Vector2>();
+        HandleLook();
+        HandleMovement();
+        HandleJump();
+        HandlePause();
+        HandleInteract();
+        HandleReset();
+        HandleMute();
+    }
 
-        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
-        transform.Translate(moveDirection * speed * Time.deltaTime);
+    void HandleMovement()
+    {
+        Vector2 moveInput = move.ReadValue<Vector2>();
 
-        transform.Rotate(0, lookInput.x * sensitivity, 0);
-        playerCamera.transform.Rotate(-lookInput.y * sensitivity, 0, 0);
+        Vector3 moveDirection =
+            transform.forward * moveInput.y +
+            transform.right * moveInput.x;
 
+        transform.position += moveDirection * speed * Time.deltaTime;
+    }
+
+    void HandleLook()
+    {
+        Vector2 lookInput = look.ReadValue<Vector2>();
+
+        float mouseX = lookInput.x * lookSensitivityX;
+        float mouseY = lookInput.y * lookSensitivityY;
+
+        transform.Rotate(Vector3.up * mouseX);
+
+        pitch -= mouseY;
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+
+        playerCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+    }
+
+    void HandleJump()
+    {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
 
         if (jump.WasPressedThisFrame() && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+    }
 
+    void HandlePause()
+    {
         if (pause.WasPressedThisFrame())
         {
             ShowMouse();
-
             look.Disable();
             pasueCanvas.SetActive(true);
             Time.timeScale = 0f;
         }
+    }
 
-        if(interact.WasPressedThisFrame())
+    void HandleInteract()
+    {
+        if (interact.WasPressedThisFrame())
         {
             Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
             if (Physics.Raycast(ray, out RaycastHit hit, 2f))
             {
                 if (hit.collider.CompareTag("I"))
                 {
-                    hit.collider.GetComponent<Interactable>().Interact();
+                    Interactable interactable = hit.collider.GetComponent<Interactable>();
+                    if (interactable != null)
+                        interactable.Interact();
                 }
             }
         }
+    }
 
+    void HandleReset()
+    {
         if (reset.WasPressedThisFrame())
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
 
+    void HandleMute()
+    {
         if (mute.WasPressedThisFrame())
         {
-            audios.GetComponent<AudioSource>().mute = !audios.GetComponent<AudioSource>().mute;
+            AudioSource source = audios.GetComponent<AudioSource>();
+            if (source != null)
+                source.mute = !source.mute;
         }
     }
 
@@ -120,11 +173,18 @@ public class PlayerMove : MonoBehaviour
     public void EnableLook()
     {
         look.Enable();
+        LockMouse();
     }
 
     void ShowMouse()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    void LockMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
