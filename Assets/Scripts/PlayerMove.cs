@@ -80,6 +80,8 @@ public class PlayerMove : MonoBehaviour
 
         if (pause.WasPressedThisFrame())
         {
+            ShowMouse();
+
             look.Disable();
             pasueCanvas.SetActive(true);
             Time.timeScale = 0f;
@@ -117,5 +119,11 @@ public class PlayerMove : MonoBehaviour
     public void EnableLook()
     {
         look.Enable();
+    }
+
+    void ShowMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

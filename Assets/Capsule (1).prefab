@@ -334,6 +334,7 @@ MonoBehaviour:
   collected: 000000000000000000000000
   playerCamera: {fileID: 3568251451549378530}
   pasueCanvas: {fileID: 0}
+  Audio: {fileID: 0}
 --- !u!114 &5784142727246826393
 MonoBehaviour:
   m_ObjectHideFlags: 0

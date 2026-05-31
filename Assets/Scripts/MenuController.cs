@@ -22,9 +22,17 @@ public class MenuController : MonoBehaviour
 
     public void Resume()
     {
+        HideMouse();
+
         PlayerMove playerMove = FindFirstObjectByType<PlayerMove>();
         playerMove.EnableLook();
         pauseCanvas.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    void HideMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
